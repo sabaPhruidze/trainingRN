@@ -1,7 +1,11 @@
 import { View, Text, StyleSheet, Image, Pressable } from "react-native";
 import React from "react";
+import { RootStackParamList } from "../Main";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
 
-const First = () => {
+type Props = NativeStackScreenProps<RootStackParamList, "First">;
+
+const First = ({ navigation }: Props) => {
   return (
     <View style={styles.container}>
       <Image
@@ -13,8 +17,11 @@ const First = () => {
       />
       <Text style={styles.name}>Saba Phruidze</Text>
       <Text style={styles.position}>React Native Developer</Text>
-      <Pressable style={styles.btn}>
-        <Text style={styles.btnText}>Follow</Text>
+      <Pressable
+        style={styles.btn}
+        onPress={() => navigation.navigate("Second")}
+      >
+        <Text style={styles.btnText}>Send step</Text>
       </Pressable>
     </View>
   );
