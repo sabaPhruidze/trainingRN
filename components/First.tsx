@@ -21,7 +21,7 @@ const First = ({ navigation }: Props) => {
         style={styles.btn}
         onPress={() => navigation.navigate("Second")}
       >
-        <Text style={styles.btnText}>Send step</Text>
+        <Text style={styles.btnText}>Next step</Text>
       </Pressable>
     </View>
   );
