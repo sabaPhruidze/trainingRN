@@ -8,9 +8,8 @@ const Second = () => {
     <SafeAreaView style={styles.container}>
       <View
         style={[styles.box, toggle ? styles.toggleLight : styles.toggleDark]}
-      >
-        <Text>saba</Text>
-      </View>
+      />
+      <Switch value={toggle} onValueChange={() => setToggle((prev) => !prev)} />
     </SafeAreaView>
   );
 };
