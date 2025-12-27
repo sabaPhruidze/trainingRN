@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Image } from "react-native";
+import { View, Text, StyleSheet, Image, Pressable } from "react-native";
 import React from "react";
 
 const First = () => {
@@ -11,6 +11,11 @@ const First = () => {
         alt="It is an user icon with white and blue colors.In the center is a person's icon in white colors, outside it has blue and than white circle"
         style={styles.icon}
       />
+      <Text style={styles.name}>Saba Phruidze</Text>
+      <Text style={styles.position}>React Native Developer</Text>
+      <Pressable style={styles.btn}>
+        <Text style={styles.btnText}>Follow</Text>
+      </Pressable>
     </View>
   );
 };
@@ -22,11 +27,32 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#95e600ff",
+    backgroundColor: "#a0903eff",
   },
   icon: {
     width: 150,
     height: 150,
     borderRadius: 75,
+  },
+  name: {
+    fontSize: 24,
+    marginTop: 15,
+    color: "rgba(255, 255, 255, 1)",
+  },
+  position: {
+    color: "rgba(255, 255, 255, 1)",
+    fontSize: 20,
+  },
+  btn: {
+    width: 100,
+    height: 40,
+    backgroundColor: "rgba(255, 255, 255, 1)",
+    borderRadius: 30,
+    marginTop: 15,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  btnText: {
+    fontSize: 18,
   },
 });
