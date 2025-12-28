@@ -5,10 +5,14 @@ import {
   StyleSheet,
   Pressable,
   Image,
+  View,
 } from "react-native";
 import React, { useState } from "react";
+import { RootStackParamList } from "../Main";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
 
-const Third = () => {
+type Props = NativeStackScreenProps<RootStackParamList, "Third">;
+const Third = ({ navigation }: Props) => {
   const [toggle, setToggle] = useState<boolean>(false);
   const toggleOn = () => setToggle(true);
   const toggleOff = () => setToggle(false);
@@ -23,16 +27,24 @@ const Third = () => {
         </Text>
       </Pressable>
       {toggle && (
-        <Modal animationType="fade" style={[styles.modal, styles.center]}>
-          <Text>This is a secret information</Text>
-          <Pressable onPress={toggleOff} style={styles.exitBtn}>
-            <Image
-              source={require("../assets/exit.png")}
-              style={styles.exitIcon}
-            />
-          </Pressable>
+        <Modal animationType="fade">
+          <View style={[styles.modal, styles.center]}>
+            <Text style={{ fontSize: 30 }}>This is a secret information</Text>
+            <Pressable onPress={toggleOff} style={styles.exitBtn}>
+              <Image
+                source={require("../assets/exit.png")}
+                style={styles.exitIcon}
+              />
+            </Pressable>
+          </View>
         </Modal>
       )}
+      <Pressable
+        style={[styles.btn, { marginTop: 10 }, styles.center]}
+        onPress={() => navigation.navigate("Fourth")}
+      >
+        <Text style={styles.btnText}>Next Project</Text>
+      </Pressable>
     </ImageBackground>
   );
 };
@@ -59,6 +71,8 @@ const styles = StyleSheet.create({
   },
   modal: {
     position: "relative",
+    flex: 1,
+    backgroundColor: "#46ce5cff",
   },
   exitBtn: {
     position: "absolute",
