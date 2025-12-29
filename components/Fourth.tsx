@@ -1,5 +1,7 @@
-import { View, Text, FlatList, StyleSheet } from "react-native";
+import { View, Text, FlatList, StyleSheet, Pressable } from "react-native";
 import React from "react";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { RootStackParamList } from "../Main";
 export const hobbiesData = [
   { id: 1, title: "Programming" },
   { id: 2, title: "Working out" },
@@ -18,17 +20,27 @@ export const hobbiesData = [
   { id: 15, title: "Blogging" },
 ] as const;
 
-const Fourth = () => {
+type Props = NativeStackScreenProps<RootStackParamList, "Fourth">;
+
+const Fourth = ({ navigation }: Props) => {
   return (
-    <FlatList
-      data={hobbiesData}
-      keyExtractor={(item) => item.id.toString()}
-      renderItem={({ item }) => (
-        <View style={styles.container}>
-          <Text style={styles.text}>{item.title} </Text>
-        </View>
-      )}
-    />
+    <View>
+      <FlatList
+        data={hobbiesData}
+        keyExtractor={(item) => item.id.toString()}
+        renderItem={({ item }) => (
+          <View style={styles.container}>
+            <Text style={styles.text}>{item.title} </Text>
+          </View>
+        )}
+      />
+      <Pressable
+        onPress={() => navigation.navigate("Fifth")}
+        style={[styles.btn, styles.center, { marginTop: 20 }]}
+      >
+        <Text>Move on next project</Text>
+      </Pressable>
+    </View>
   );
 };
 
@@ -45,5 +57,15 @@ const styles = StyleSheet.create({
   },
   text: {
     color: "#ffffffff",
+  },
+  btn: {
+    width: 150,
+    height: 40,
+    borderRadius: 60,
+    backgroundColor: "#ffffffff",
+  },
+  center: {
+    justifyContent: "center",
+    alignItems: "center",
   },
 });
