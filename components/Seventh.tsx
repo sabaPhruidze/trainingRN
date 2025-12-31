@@ -1,5 +1,13 @@
-import { View, Text, FlatList, StyleSheet, Image } from "react-native";
-import React from "react";
+import {
+  View,
+  Text,
+  FlatList,
+  StyleSheet,
+  Image,
+  Modal,
+  Pressable,
+} from "react-native";
+import React, { useState } from "react";
 import { RootStackParamList } from "../Main";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 
@@ -35,21 +43,69 @@ const Seventh = ({ navigation }: Props) => {
     {
       id: "5",
       content:
-        "https://media.istockphoto.com/id/1437816897/photo/business-woman-manager-or-human-resources-portrait-for-career-success-company-we-are-hiring.jpg?s=612x612&w=0&k=20&c=tyLvtzutRh22j9GqSGI33Z4HpIwv9vL_MZw_xOE19NQ=",
+        "https://images.pexels.com/photos/1704488/pexels-photo-1704488.jpeg?cs=srgb&dl=pexels-sulimansallehi-1704488.jpg&fm=jpg",
     },
   ];
+  const DATAList: Data[] = [
+    {
+      id: "6",
+      content: "Hardship",
+    },
+    {
+      id: "7",
+      content: "Strength",
+    },
+    {
+      id: "8",
+      content: "Resolve",
+    },
+    {
+      id: "9",
+      content: "Strong",
+    },
+    {
+      id: "10",
+      content: "Wordly",
+    },
+  ];
+  const [open, setOpen] = useState<boolean>(false);
+  const [currImage, setCurrentImage] = useState<string>("");
+  const handleButton = (imgUrl: string) => {
+    setOpen(true);
+    setCurrentImage(imgUrl);
+  };
   return (
     <View style={styles.container}>
       <FlatList
         data={DATA}
         keyExtractor={(item: Data) => item.id}
         renderItem={({ item }) => (
-          <View style={styles.card}>
+          <Pressable
+            style={styles.card}
+            onPress={() => handleButton(item.content)}
+          >
             <Image source={{ uri: item.content }} style={styles.image} />
-          </View>
+          </Pressable>
         )}
         horizontal
+        showsHorizontalScrollIndicator={false}
       />
+      <FlatList
+        data={DATAList}
+        keyExtractor={(item: Data) => item.id}
+        renderItem={({ item }) => (
+          <View>
+            <Text>{item.content}</Text>
+          </View>
+        )}
+      />
+      <Modal
+        animationType="slide"
+        visible={open}
+        onRequestClose={() => setOpen(false)}
+      >
+        <Image source={{ uri: currImage }} style={styles.modalImage} />
+      </Modal>
     </View>
   );
 };
@@ -66,11 +122,15 @@ const styles = StyleSheet.create({
     width: 100,
     height: 100,
     marginLeft: 20,
+    marginTop: 20,
   },
   image: {
     width: 100,
     height: 100,
     borderRadius: 50,
     borderColor: "#ffffffff",
+  },
+  modalImage: {
+    flex: 1,
   },
 });
