@@ -1,7 +1,10 @@
 import { View, Text } from "react-native";
 import React from "react";
+import { RootStackParamList } from "../Main";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
 
-const Nine = () => {
+type Props = NativeStackScreenProps<RootStackParamList, "Nine">;
+const Nine = ({ navigation }: Props) => {
   return (
     <View>
       <Text>Nine</Text>

@@ -17,6 +17,12 @@ const Eight = ({ navigation }: Props) => {
       <Pressable style={styles.btn}>
         <Text>hi its me button</Text>
       </Pressable>
+      <Pressable
+        onPress={() => navigation.navigate("Nine")}
+        style={[styles.btn, styles.center, { marginTop: 20 }]}
+      >
+        <Text style={styles.text}>Move on next project</Text>
+      </Pressable>
     </View>
   );
 };
@@ -49,5 +55,12 @@ const styles = StyleSheet.create({
       android: StatusBar.currentHeight,
       default: StatusBar.currentHeight,
     }),
+  },
+  center: {
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  text: {
+    color: "#ffffffff",
   },
 });
