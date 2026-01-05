@@ -20,7 +20,8 @@ const Ten = ({ navigation }: Props) => {
     try {
       const res = await fetch("https://jsonplaceholder.typicode.com/todos");
       const json = await res.json();
-      setTodos(json);
+      const shortList = json.slice(0, 10);
+      setTodos(shortList);
     } catch (error) {
       console.error(error);
     } finally {
