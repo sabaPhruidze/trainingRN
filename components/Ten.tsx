@@ -36,7 +36,7 @@ const Ten = ({ navigation }: Props) => {
   return (
     <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
       <Pressable
-        onPress={() => navigation.navigate("Eight")}
+        onPress={() => navigation.navigate("Eleven")}
         style={[styles.btn, styles.center, { marginTop: 20 }]}
       >
         <Text style={styles.text}>Move to next project</Text>
