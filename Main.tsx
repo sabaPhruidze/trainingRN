@@ -55,6 +55,7 @@ const Main = () => {
             title: "11 test",
             headerStyle: { backgroundColor: "green" }, //background color , which consists statusbar as well
             headerTintColor: "white", //text color
+            statusBarStyle: "auto",
           }}
         />
         <Stack.Screen name="Twelve" component={Twelve} />
