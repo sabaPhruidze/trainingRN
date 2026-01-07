@@ -13,8 +13,8 @@ const TabNavigator = () => {
   return (
     <Tab.Navigator screenOptions={{ tabBarActiveTintColor: "blue" }}>
       <Tab.Screen name="First" component={First} />
-      <Tab.Screen name="Seventh" component={Seventh} />
       <Tab.Screen name="Twelve" component={Twelve} />
+      <Tab.Screen name="Seventh" component={Seventh} />
     </Tab.Navigator>
   );
 };
