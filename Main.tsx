@@ -1,5 +1,7 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { NavigatorScreenParams } from "@react-navigation/native";
+import TabNavigator, { TabParamList } from "./navigation/TabNavigator";
 import First from "./components/First";
 import Second from "./components/Second";
 import Third from "./components/Third";
@@ -25,6 +27,7 @@ export type RootStackParamList = {
   Ten: undefined;
   Eleven: undefined;
   Twelve: undefined;
+  Tabs: NavigatorScreenParams<TabParamList>;
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -34,6 +37,11 @@ const Main = () => {
     <NavigationContainer>
       {/* if I want to remove all headers I can add attribute on Stack.Navigator screenOptions={{headerShown:false}} */}
       <Stack.Navigator>
+        <Stack.Screen
+          name="Tabs"
+          component={TabNavigator}
+          options={{ headerShown: false }}
+        />
         <Stack.Screen name="First" component={First} />
         <Stack.Screen name="Second" component={Second} />
         <Stack.Screen name="Third" component={Third} />
