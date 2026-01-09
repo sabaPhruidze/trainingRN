@@ -1,9 +1,17 @@
 import { View, Text, StyleSheet, Image, Pressable } from "react-native";
 import React from "react";
-import { RootStackParamList } from "../Main";
+
+import { CompositeScreenProps } from "@react-navigation/native";
+import { BottomTabScreenProps } from "@react-navigation/bottom-tabs";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 
-type Props = NativeStackScreenProps<RootStackParamList, "First">;
+import { TabParamList } from "../navigation/TabNavigator";
+import { RootStackParamList } from "../Main";
+
+type Props = CompositeScreenProps<
+  BottomTabScreenProps<TabParamList, "First">,
+  NativeStackScreenProps<RootStackParamList>
+>;
 
 const First = ({ navigation }: Props) => {
   return (

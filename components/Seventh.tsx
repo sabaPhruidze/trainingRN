@@ -8,10 +8,17 @@ import {
   Pressable,
 } from "react-native";
 import React, { useState } from "react";
-import { RootStackParamList } from "../Main";
+import { CompositeScreenProps } from "@react-navigation/native";
+import { BottomTabScreenProps } from "@react-navigation/bottom-tabs";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 
-type Props = NativeStackScreenProps<RootStackParamList, "Seventh">;
+import { TabParamList } from "../navigation/TabNavigator";
+import { RootStackParamList } from "../Main";
+
+type Props = CompositeScreenProps<
+  BottomTabScreenProps<TabParamList, "Seventh">,
+  NativeStackScreenProps<RootStackParamList>
+>;
 
 interface Data {
   id: string;
