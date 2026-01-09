@@ -47,7 +47,7 @@ const Sixth = ({ navigation }: Props) => {
         }
       />
       <Pressable
-        onPress={() => navigation.navigate("Seventh")}
+        onPress={() => navigation.navigate("Tabs", { screen: "Seventh" })}
         style={[styles.btn, styles.center, { marginTop: 20 }]}
       >
         <Text style={styles.text}>Move on next project</Text>

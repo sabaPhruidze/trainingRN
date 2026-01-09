@@ -11,10 +11,10 @@ export type TabParamList = {
 const Tab = createBottomTabNavigator<TabParamList>();
 const TabNavigator = () => {
   return (
-    <Tab.Navigator screenOptions={{ tabBarActiveTintColor: "blue" }}>
+    <Tab.Navigator screenOptions={{ tabBarActiveTintColor: "green" }}>
       <Tab.Screen name="First" component={First} />
-      <Tab.Screen name="Twelve" component={Twelve} />
       <Tab.Screen name="Seventh" component={Seventh} />
+      <Tab.Screen name="Twelve" component={Twelve} />
     </Tab.Navigator>
   );
 };
