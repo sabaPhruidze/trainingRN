@@ -1,14 +1,50 @@
-import { View, Text, Pressable, StyleSheet } from "react-native";
-import React from "react";
+import { View, Text, Pressable, StyleSheet, Animated } from "react-native";
+import React, { useState, useEffect } from "react";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../Main";
 
 type Props = NativeStackScreenProps<RootStackParamList, "Thirteen">;
 
 const Thirteen = ({ navigation }: Props) => {
+  const [toggle, setToggle] = useState(false);
+
+  const [boxY] = useState(() => new Animated.Value(0));
+
+  useEffect(() => {
+    Animated.timing(boxY, {
+      toValue: toggle ? 300 : 0,
+      duration: 1500,
+      useNativeDriver: true,
+    }).start();
+  }, [toggle, boxY]);
+
   return (
-    <View>
-      <View style={styles.box} />
+    <View style={styles.container}>
+      <Animated.View
+        style={[styles.box, { transform: [{ translateY: boxY }] }]}
+      />
+
+      <Pressable
+        onPress={() => setToggle((p) => !p)}
+        style={{
+          marginTop: 20,
+        }}
+      >
+        <Text
+          style={{
+            backgroundColor: "black",
+            color: "white",
+            borderRadius: 10,
+            width: 100,
+            height: 30,
+            paddingTop: 5,
+            textAlign: "center",
+          }}
+        >
+          {toggle ? "ასვლა" : "ჩასვლა"}
+        </Text>
+      </Pressable>
+
       <Pressable
         style={styles.btn}
         onPress={() => navigation.navigate("Fourteen")}
@@ -22,11 +58,8 @@ const Thirteen = ({ navigation }: Props) => {
 export default Thirteen;
 
 const styles = StyleSheet.create({
-  box: {
-    width: 100,
-    height: 100,
-    backgroundColor: "red",
-  },
+  container: { flex: 1, alignItems: "center" },
+  box: { width: 100, height: 100, backgroundColor: "red" },
   btn: {
     width: 100,
     height: 40,
@@ -36,8 +69,5 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-
-  btnText: {
-    fontSize: 18,
-  },
+  btnText: { fontSize: 18 },
 });
