@@ -1,11 +1,10 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons } from "@expo/vector-icons";
-import First from "../components/First";
+
 import Seventh from "../components/Seventh";
 import Twelve from "../components/Twelve";
 
 export type TabParamList = {
-  First: undefined;
   Seventh: undefined;
   Twelve: undefined;
 };
@@ -18,16 +17,6 @@ const TabNavigator = () => {
         tabBarInactiveTintColor: "gray",
       }}
     >
-      <Tab.Screen
-        name="First"
-        component={First}
-        options={{
-          tabBarLabel: "Home",
-          tabBarIcon: ({ color, size }) => (
-            <Ionicons name="home" size={size} color={color} />
-          ),
-        }}
-      />
       <Tab.Screen
         name="Seventh"
         component={Seventh}
