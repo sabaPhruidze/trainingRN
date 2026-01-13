@@ -6,8 +6,18 @@ import { RootStackParamList } from "../Main";
 type Props = NativeStackScreenProps<RootStackParamList, "Twelve">;
 
 const Twelve = ({ navigation }: Props) => {
+  const textRef = useRef(new Animated.Value(0)).current;
+
+  useEffect(() => {
+    Animated.timing(textRef, {
+      toValue: 1,
+      duration: 2000,
+      useNativeDriver: true,
+    }).start();
+  }, [textRef]);
   return (
     <View style={styles.container}>
+      <Animated.Text style={{ opacity: textRef }}>გამარჯობა!</Animated.Text>
       <Pressable
         style={styles.btn}
         onPress={() => navigation.navigate("Thirteen")}
@@ -35,6 +45,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
+
   btnText: {
     fontSize: 18,
   },
