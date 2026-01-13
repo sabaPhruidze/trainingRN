@@ -22,9 +22,9 @@ const TabNavigator = () => {
         name="First"
         component={First}
         options={{
-          tabBarLabel: "List",
+          tabBarLabel: "Home",
           tabBarIcon: ({ color, size }) => (
-            <Ionicons name="list" size={size} color={color} />
+            <Ionicons name="home" size={size} color={color} />
           ),
         }}
       />
@@ -32,12 +32,12 @@ const TabNavigator = () => {
         name="Second"
         component={Second}
         options={{
-          title: "switch",
+          title: "Switch",
           headerStyle: { backgroundColor: "yellow" },
           headerTintColor: "black",
-          tabBarLabel: "Switch",
+          tabBarLabel: "Settings",
           tabBarIcon: ({ color, size }) => (
-            <Ionicons name="basketball" size={size} color={color} />
+            <Ionicons name="settings" size={size} color={color} />
           ),
         }}
       />
@@ -45,9 +45,9 @@ const TabNavigator = () => {
         name="Third"
         component={Third}
         options={{
-          tabBarLabel: "Settings",
+          tabBarLabel: "Profile",
           tabBarIcon: ({ size, color }) => (
-            <Ionicons name="settings" size={size} color={color} />
+            <Ionicons name="football" size={size} color={color} />
           ),
         }}
       />
