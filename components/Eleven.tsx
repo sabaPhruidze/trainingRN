@@ -9,7 +9,7 @@ const Eleven = ({ navigation }: Props) => {
   return (
     <View>
       <Pressable
-        onPress={() => navigation.navigate("Tabs", { screen: "Twelve" })}
+        onPress={() => navigation.navigate("Twelve")}
         style={[styles.btn, styles.center, { marginTop: 20 }]}
       >
         <Text style={styles.text}>next project</Text>
