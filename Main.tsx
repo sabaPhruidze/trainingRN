@@ -13,6 +13,8 @@ import Ten from "./components/Ten";
 import Eleven from "./components/Eleven";
 import Twelve from "./components/Twelve";
 import Thirteen from "./components/Thirteen";
+import Fourteen from "./components/Fourteen";
+import Fifteen from "./components/Fifteen";
 export type RootStackParamList = {
   Tabs: NavigatorScreenParams<TabParamList>;
   Fourth: undefined;
@@ -25,6 +27,8 @@ export type RootStackParamList = {
   Eleven: undefined;
   Twelve: undefined;
   Thirteen: undefined;
+  Fourteen: undefined;
+  Fifteen: undefined;
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -62,6 +66,8 @@ const Main = () => {
         />
         <Stack.Screen name="Twelve" component={Twelve} />
         <Stack.Screen name="Thirteen" component={Thirteen} />
+        <Stack.Screen name="Fourteen" component={Fourteen} />
+        <Stack.Screen name="Fifteen" component={Fifteen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

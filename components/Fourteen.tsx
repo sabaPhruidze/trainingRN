@@ -3,15 +3,14 @@ import React from "react";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../Main";
 
-type Props = NativeStackScreenProps<RootStackParamList, "Thirteen">;
+type Props = NativeStackScreenProps<RootStackParamList, "Fourteen">;
 
-const Thirteen = ({ navigation }: Props) => {
+const Fourteen = ({ navigation }: Props) => {
   return (
     <View>
-      <View style={styles.box} />
       <Pressable
         style={styles.btn}
-        onPress={() => navigation.navigate("Fourteen")}
+        onPress={() => navigation.navigate("Fifteen")}
       >
         <Text style={styles.btnText}>Next step</Text>
       </Pressable>
@@ -19,14 +18,9 @@ const Thirteen = ({ navigation }: Props) => {
   );
 };
 
-export default Thirteen;
+export default Fourteen;
 
 const styles = StyleSheet.create({
-  box: {
-    width: 100,
-    height: 100,
-    backgroundColor: "red",
-  },
   btn: {
     width: 100,
     height: 40,
