@@ -1,3 +1,4 @@
+import "./global.css";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NavigatorScreenParams } from "@react-navigation/native";
@@ -37,7 +38,7 @@ const Main = () => {
   return (
     <NavigationContainer>
       {/* if I want to remove all headers I can add attribute on Stack.Navigator screenOptions={{headerShown:false}} */}
-      <Stack.Navigator initialRouteName="Tabs">
+      <Stack.Navigator initialRouteName="Fourteen">
         <Stack.Screen
           name="Tabs"
           component={TabNavigator}

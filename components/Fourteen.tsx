@@ -7,9 +7,9 @@ type Props = NativeStackScreenProps<RootStackParamList, "Fourteen">;
 
 const Fourteen = ({ navigation }: Props) => {
   return (
-    <View>
+    <View className="flex-1 justify-center items-center">
       <Pressable
-        className="w-100 h-40 bg-white b-8 mt-15 flex justify-center items-center"
+        className="w-60 h-20 bg-white rounded-lg mt-4 items-center justify-center"
         onPress={() => navigation.navigate("Fifteen")}
       >
         <Text style={styles.btnText}>Next step</Text>
@@ -21,16 +21,6 @@ const Fourteen = ({ navigation }: Props) => {
 export default Fourteen;
 
 const styles = StyleSheet.create({
-  btn: {
-    width: 100,
-    height: 40,
-    backgroundColor: "rgba(255, 255, 255, 1)",
-    borderRadius: 30,
-    marginTop: 15,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-
   btnText: {
     fontSize: 18,
   },
