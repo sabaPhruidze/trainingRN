@@ -33,8 +33,8 @@ const Fifteen = ({ navigation }: Props) => {
   return (
     <SafeAreaView className="flex-1">
       <Text>Fifteen</Text>
-      <Pressable onPress={scheduleNotificationAsync}className="w-10 h-10 bg-green-300">
-        <Text>Ring the bell</Text>
+      <Pressable onPress={scheduleNotificationAsync}className="mt-10 w-[200px] h-[50px] bg-green-800 flex justify-center rounded-xl items-center">
+        <Text className="text-xl text-white font-extrabold">Ring the bell</Text>
       </Pressable>
       <Pressable
               className="mt-10 w-[200px] h-[50px] bg-black flex justify-center rounded-xl items-center"
