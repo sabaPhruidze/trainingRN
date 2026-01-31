@@ -1,98 +1,87 @@
-import { Text, Pressable, Alert, Platform } from "react-native";
 import React, { useEffect } from "react";
-import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { RootStackParamList } from "../Main";
-import * as Notifications from 'expo-notifications';
-import * as Device from 'expo-device';
+import { Alert, Platform, Pressable, Text } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import * as Notifications from "expo-notifications";
 
-type Props = NativeStackScreenProps<RootStackParamList, "Fifteen">;
-
-// Notification handler - კომპონენტის გარეთ
+// 1) Handler — რომ notification გამოჩნდეს foreground-ში
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
-    shouldShowAlert: true,
-    shouldPlaySound: true,
-    shouldSetBadge: false,
     shouldShowBanner: true,
     shouldShowList: true,
+    shouldPlaySound: true,
+    shouldSetBadge: false,
   }),
 });
 
-const Fifteen = ({ navigation }: Props) => {
-  
+export default function Fifteen() {
   useEffect(() => {
-    registerForPushNotificationsAsync();
+    initLocalNotifications();
   }, []);
 
-  // Permission-ის მოთხოვნა
-  async function registerForPushNotificationsAsync() {
-    if (Platform.OS === 'android') {
-      await Notifications.setNotificationChannelAsync('default', {
-        name: 'default',
-        importance: Notifications.AndroidImportance.MAX,
-        vibrationPattern: [0, 250, 250, 250],
-        lightColor: '#FF231F7C',
-      });
-    }
+  // 2) Permission + Android Channel
+  async function initLocalNotifications() {
+    try {
+      if (Platform.OS === "android") {
+        await Notifications.setNotificationChannelAsync("default", {
+          name: "default",
+          importance: Notifications.AndroidImportance.MAX,
+        });
+      }
 
-    if (Device.isDevice) {
-      const { status: existingStatus } = await Notifications.getPermissionsAsync();
-      let finalStatus = existingStatus;
-      
-      if (existingStatus !== 'granted') {
-        const { status } = await Notifications.requestPermissionsAsync();
-        finalStatus = status;
+      const { status } = await Notifications.getPermissionsAsync();
+      if (status !== "granted") {
+        const req = await Notifications.requestPermissionsAsync();
+        if (req.status !== "granted") {
+          Alert.alert("Permission", "ნოტიფიკაციების ნებართვა არ არის ჩართული.");
+          return;
+        }
       }
-      
-      if (finalStatus !== 'granted') {
-        Alert.alert('Permission not granted', 'Failed to get push notification permissions');
-        return;
-      }
-    } else {
-      Alert.alert('Must use physical device for Push Notifications');
+    } catch (e) {
+      console.log("initLocalNotifications error:", e);
+      Alert.alert("Error", "Notifications init error");
     }
   }
 
-  const scheduleNotificationAsync = async () => {
+  // 3) ღილაკზე დაჭერა → მყისიერი LOCAL notification
+  async function sendLocalNotification() {
     try {
       await Notifications.scheduleNotificationAsync({
         content: {
-          title: 'Hi 👋',
-          body: 'This is a local notification!',
+          title: "Hi 👋",
+          body: "ეს არის ლოკალური შეტყობინება",
           sound: true,
         },
-        trigger: {
-          type: Notifications.SchedulableTriggerInputTypes.TIME_INTERVAL,
-          seconds: 2,
-        },
+        trigger: null, // მყისიერად
       });
-      Alert.alert('Success', 'Notification scheduled!');
-    } catch (error) {
-      console.error('Error scheduling notification:', error);
-      Alert.alert('Error', 'Failed to schedule notification');
+    } catch (e) {
+      console.log("sendLocalNotification error:", e);
+      Alert.alert("Error", "Notification ვერ გაიგზავნა");
     }
-  };
+  }
 
   return (
-    <SafeAreaView className="flex-1 items-center justify-center">
-      <Text className="text-2xl mb-5">Fifteen</Text>
-      
-      <Pressable 
-        onPress={scheduleNotificationAsync}
-        className="mt-10 w-[200px] h-[50px] bg-green-800 flex justify-center rounded-xl items-center"
-      >
-        <Text className="text-xl text-white font-extrabold">Ring the bell</Text>
-      </Pressable>
-      
+    <SafeAreaView
+      style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
+    >
+      <Text style={{ fontSize: 24, marginBottom: 20 }}>
+        Local Notification Test
+      </Text>
+
       <Pressable
-        className="mt-10 w-[200px] h-[50px] bg-black flex justify-center rounded-xl items-center"
-        onPress={() => navigation.navigate("Sixteen")}
+        onPress={sendLocalNotification}
+        style={{
+          width: 220,
+          height: 50,
+          backgroundColor: "#166534",
+          alignItems: "center",
+          justifyContent: "center",
+          borderRadius: 12,
+        }}
       >
-        <Text className="text-xl text-white font-extrabold">Next step</Text>
+        <Text style={{ color: "white", fontSize: 18, fontWeight: "800" }}>
+          Ring the bell
+        </Text>
       </Pressable>
     </SafeAreaView>
   );
-};
-
-export default Fifteen;
+}
