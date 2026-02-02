@@ -65,7 +65,7 @@ export default function Fifteen({ navigation }: Props) {
 
       <Pressable
         onPress={sendLocalNotification}
-        className="w-56 h-14 bg-green-800 items-center justify-center rounded-xl"
+        className="w-56 h-14 bg-green-900 items-center justify-center rounded-xl"
       >
         <Text className="text-white text-lg font-bold  ">Ring the bell</Text>
       </Pressable>
