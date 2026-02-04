@@ -11,13 +11,13 @@ Notifications.setNotificationHandler({
     shouldShowBanner: true,
     shouldShowList: true,
     shouldPlaySound: true,
-    shouldSetBadge: false,
+    shouldSetBadge: true,
   }),
 });
 
 export default function Fifteen({ navigation }: Props) {
   // 2) Permission + Android Channel
-  async function initLocalNotifications() {
+  const initLocalNotifications = async () => {
     try {
       if (Platform.OS === "android") {
         await Notifications.setNotificationChannelAsync("default", {
@@ -25,20 +25,20 @@ export default function Fifteen({ navigation }: Props) {
           importance: Notifications.AndroidImportance.MAX,
         });
       }
-
       const { status } = await Notifications.getPermissionsAsync();
       if (status !== "granted") {
-        const req = await Notifications.requestPermissionsAsync();
-        if (req.status !== "granted") {
+        const { status: newStatus } =
+          await Notifications.requestPermissionsAsync();
+        if (newStatus !== "granted") {
           Alert.alert("Permission", "Notification permission is not granted");
           return;
         }
       }
-    } catch (e) {
-      console.log("initLocalNotifications error:", e);
+    } catch (error) {
+      console.log("InitialLocalNotifications error:", error);
       Alert.alert("Error", "Notifications init error");
     }
-  }
+  };
   useEffect(() => {
     initLocalNotifications();
   }, []);
