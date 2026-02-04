@@ -5,6 +5,7 @@ import * as Notifications from "expo-notifications";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../Main";
 type Props = NativeStackScreenProps<RootStackParamList, "Fifteen">;
+
 // 1) Handler — notification in foreground to appeal
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
@@ -17,7 +18,7 @@ Notifications.setNotificationHandler({
 
 export default function Fifteen({ navigation }: Props) {
   // 2) Permission + Android Channel
-  const initLocalNotifications = async () => {
+  const initLocalNotifications = async (): Promise<boolean> => {
     try {
       if (Platform.OS === "android") {
         await Notifications.setNotificationChannelAsync("default", {
@@ -25,42 +26,48 @@ export default function Fifteen({ navigation }: Props) {
           importance: Notifications.AndroidImportance.MAX,
         });
       }
+
       const { status } = await Notifications.getPermissionsAsync();
       if (status !== "granted") {
         const { status: newStatus } =
           await Notifications.requestPermissionsAsync();
         if (newStatus !== "granted") {
           Alert.alert("Permission", "Notification permission is not granted");
-          return;
+          return false;
         }
       }
-    } catch (error) {
-      console.log("InitialLocalNotifications error:", error);
+      return true;
+    } catch (e) {
+      console.log("InitialLocalNotifications error:", e);
       Alert.alert("Error", "Notifications init error");
+      return false;
     }
   };
+
   const scheduleTime = async () => {
     //it will be calculate by local time using your phone time
     const now = new Date();
     const target = new Date(now);
-    target.setHours(12, 1, 0, 0);
-    //if 11:46, already been it will be moved tomorrow
+    target.setHours(12, 28, 0, 0);
+    //if 12:15, already been it will be moved tomorrow
     if (target <= now) {
       target.setDate(target.getDate() + 1);
     }
     await Notifications.scheduleNotificationAsync({
       content: {
         title: "reminder",
-        body: "It is 11:55",
+        body: "It is 12:15",
         sound: true,
       },
       trigger: { date: target } as Notifications.NotificationTriggerInput,
     });
+    Alert.alert("DEBUG", "scheduleTime() called ✅");
   };
   useEffect(() => {
     const run = async () => {
-      await initLocalNotifications();
-      await Notifications.cancelAllScheduledNotificationsAsync();
+      const ok = await initLocalNotifications();
+      if (!ok) return;
+
       await scheduleTime();
     };
 
@@ -73,8 +80,8 @@ export default function Fifteen({ navigation }: Props) {
       setTimeout(async () => {
         await Notifications.scheduleNotificationAsync({
           content: {
-            title: "reminder",
-            body: "It is 11:52",
+            title: "Hi ",
+            body: "Just remainding you to have a nice day",
             sound: true,
           },
           trigger: null,
@@ -89,12 +96,6 @@ export default function Fifteen({ navigation }: Props) {
   return (
     <SafeAreaView className="flex-1 items-center justify-center bg-green-500">
       <Text className="text-lg m-5">Local Notification Test</Text>
-      <Pressable
-        onPress={scheduleTime}
-        className="mt-5 w-56 h-14 bg-blue-900 items-center justify-center rounded-xl mb-10"
-      >
-        <Text className="text-white text-lg font-bold">Schedule 11:52</Text>
-      </Pressable>
       <Pressable
         onPress={sendLocalNotification}
         className="w-56 h-14 bg-green-900 items-center justify-center rounded-xl"
