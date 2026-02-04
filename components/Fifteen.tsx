@@ -43,7 +43,7 @@ export default function Fifteen({ navigation }: Props) {
     initLocalNotifications();
   }, []);
   //  immediate notification since trigger is null
-  async function sendLocalNotification() {
+  const sendLocalNotification = async () => {
     try {
       await Notifications.scheduleNotificationAsync({
         content: {
@@ -51,13 +51,13 @@ export default function Fifteen({ navigation }: Props) {
           body: "This is a local notification have a nice day",
           sound: true,
         },
-        trigger: null, // immediatelly
+        trigger: null,
       });
-    } catch (e) {
-      console.log("sendLocalNotification error:", e);
-      Alert.alert("Error", "Notification ვერ გაიგზავნა");
+    } catch (error) {
+      console.log("sendLocalNotification error:", error);
+      Alert.alert("Error", "Notification wasn't send");
     }
-  }
+  };
 
   return (
     <SafeAreaView className="flex-1 items-center justify-center bg-green-500">
