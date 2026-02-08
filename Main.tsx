@@ -59,7 +59,7 @@ const Main = () => {
   return (
     <NavigationContainer linking={linking}>
       {/* if I want to remove all headers I can add attribute on Stack.Navigator screenOptions={{headerShown:false}} */}
-      <Stack.Navigator initialRouteName="Sixteen">
+      <Stack.Navigator initialRouteName="Tabs">
         <Stack.Screen
           name="Tabs"
           component={TabNavigator}
