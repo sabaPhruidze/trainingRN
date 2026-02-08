@@ -3,7 +3,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NavigatorScreenParams } from "@react-navigation/native";
 import TabNavigator, { TabParamList } from "./navigation/TabNavigator";
-
+import { LinkingOptions } from "@react-navigation/native";
 import * as Linking from "expo-linking";
 
 import Fourth from "./components/Fourth";
@@ -39,12 +39,18 @@ export type RootStackParamList = {
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
-const linking = {
+const linking: LinkingOptions<RootStackParamList> = {
   prefixes: [Linking.createURL("/")],
   config: {
     screens: {
       Fifth: "fifth",
       Sixteen: "user/:id",
+      Tabs: {
+        screens: {
+          First: "home",
+          Second: "settings",
+        },
+      },
     },
   },
 };
