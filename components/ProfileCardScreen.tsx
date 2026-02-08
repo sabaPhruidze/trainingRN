@@ -12,7 +12,7 @@ type Props = CompositeScreenProps<
   NativeStackScreenProps<RootStackParamList>
 >;
 
-const First = ({ navigation }: Props) => {
+const ProfileCardScreen = ({ navigation }: Props) => {
   return (
     <View style={styles.container}>
       <Image
@@ -34,7 +34,7 @@ const First = ({ navigation }: Props) => {
   );
 };
 
-export default First;
+export default ProfileCardScreen;
 
 const styles = StyleSheet.create({
   container: {

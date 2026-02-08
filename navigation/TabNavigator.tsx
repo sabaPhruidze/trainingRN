@@ -1,7 +1,7 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons } from "@expo/vector-icons";
 
-import First from "../components/First";
+import First from "../components/ProfileCardScreen";
 import Second from "../components/Second";
 import Third from "../components/Third";
 export type TabParamList = {
