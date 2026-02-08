@@ -43,8 +43,8 @@ const linking = {
   prefixes: [Linking.createURL("/")],
   config: {
     screens: {
-      Fifth: "Fifth",
-      SevenTeen: "SevenTeen",
+      Fifth: "fifth",
+      SevenTeen: "seventeen",
     },
   },
 };
