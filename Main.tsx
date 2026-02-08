@@ -34,7 +34,7 @@ export type RootStackParamList = {
   Thirteen: undefined;
   Fourteen: undefined;
   Fifteen: undefined;
-  Sixteen: undefined;
+  Sixteen: { id?: string };
   SevenTeen: undefined;
 };
 

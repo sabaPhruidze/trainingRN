@@ -3,10 +3,14 @@ import React from "react";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../Main";
 type Props = NativeStackScreenProps<RootStackParamList, "Sixteen">;
-const Sixteen = ({ navigation }: Props) => {
+const Sixteen = ({ navigation, route }: Props) => {
+  const id = route.params?.id;
   return (
-    <View>
-      <Text>Sixteen</Text>
+    <View className="flex-1 justify-center items-center ">
+      <Text className="text-5xl text-center mb-10 text-blue-800 font-extrabold">
+        Deep linking (params case)
+      </Text>
+      <Text className="">ID is {id ?? "No ID"}</Text>
       <Pressable
         className="mt-10 w-[200px] h-[50px] bg-black flex justify-center rounded-xl items-center"
         onPress={() => navigation.navigate("SevenTeen")}
