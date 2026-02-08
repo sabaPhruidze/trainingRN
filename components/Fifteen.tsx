@@ -117,7 +117,7 @@ export default function Fifteen({ navigation }: Props) {
 
       <Pressable
         className="mt-10 w-[200px] h-[50px] bg-black flex justify-center rounded-xl items-center"
-        onPress={() => navigation.navigate("Sixteen")}
+        onPress={() => navigation.navigate("Sixteen", { id: "50" })}
       >
         <Text className="text-xl text-white font-extrabold">Next step</Text>
       </Pressable>
